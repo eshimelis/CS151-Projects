@@ -4,7 +4,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -86,8 +86,44 @@ def depthFirstSearch(problem):
     print "Is the start a goal?", problem.isGoalState(problem.getStartState())
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    from game import Directions
+
+    # create/initiate fringe and empty set
+    fringe = util.Stack()
+    fringe.push(problem.getStartState())
+
+    closed = []
+    instructions = util.Stack()
+    instructions.push('Stop')
+
+    directions = util.Stack()
+    directions.push([])
+
+    while True:
+
+        if fringe.isEmpty():
+            raise ValueError('Failure: fringe is empty.')
+
+        currentState = fringe.pop()
+        currentInstructions = directions.pop()
+
+        if problem.isGoalState(currentState):
+            return currentInstructions
+
+        if currentState not in closed:
+            closed.append(currentState)
+
+            for successorState in problem.getSuccessors(currentState):
+                fringe.push(successorState[0])
+                directions.push(currentInstructions + [successorState[1]])
+
+def dfsHelper(path):
+
+    instructions = []
+
+    # for i in range()
+
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
